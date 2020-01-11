@@ -1,0 +1,50 @@
+#:kivy 1.11.1
+
+#:import IsoWidget widgets.iso.iso.IsoWidget
+
+StackLayout:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Orion'
+                with_previous: False
+            ActionGroup:
+                text: 'Camera' 
+                mode: 'spinner'
+                ActionButton:
+                    text: 'Connect'
+                ActionButton:
+                    text: 'Disconnect'
+
+    GridLayout:
+        cols: 2
+
+        TabbedPanel:
+            do_default_tab: False
+            tab_width: self.width / 3
+
+            TabbedPanelItem:
+                text: 'Focus'
+
+            TabbedPanelItem:
+                text: 'Frame'
+                
+            TabbedPanelItem:
+                text: 'Sequence'
+            
+        BoxLayout:
+            size_hint_x: None
+            width: 200
+            orientation: 'vertical'
+
+            Label:
+                text: 'Camera Settings'
+            Label:
+                text: 'Aperture'
+            Label:
+                text: 'Shutter Speed'
+            Label:
+                text: 'ISO'
+            IsoWidget:
