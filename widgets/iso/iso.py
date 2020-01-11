@@ -1,4 +1,5 @@
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.lang.builder import Builder
 
-class IsoWidget(BoxLayout):
-    pass
+class IsoWidget(Label):
+    Builder.load_file('widgets/iso/iso.kv')
