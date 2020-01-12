@@ -2,7 +2,9 @@
 
 #:import IsoWidget widgets.iso.iso.IsoWidget
 
-StackLayout:
+BoxLayout:
+    orientation:'vertical'
+
     ActionBar:
         pos_hint: {'top':1}
         ActionView:
@@ -36,9 +38,9 @@ StackLayout:
             
         BoxLayout:
             size_hint_x: None
-            size_hint_y: 1
             width: 200
             orientation: 'vertical'
+            spacing: 15
 
             Label:
                 text: 'Camera Settings'
