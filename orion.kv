@@ -2,7 +2,9 @@
 
 #:import ApertureWidget widgets.aperture.aperture.ApertureWidget
 #:import FocusWidget widgets.focus.focus.FocusWidget
+#:import FrameWidget widgets.frame.frame.FrameWidget
 #:import IsoWidget widgets.iso.iso.IsoWidget
+#:import SequenceWidget widgets.sequence.sequence.SequenceWidget
 #:import ShutterWidget widgets.shutter.shutter.ShutterWidget
 
 BoxLayout:
@@ -16,12 +18,18 @@ BoxLayout:
                 title: 'Orion'
                 with_previous: False
             ActionGroup:
+                id: camera
                 text: 'Camera' 
                 mode: 'spinner'
                 ActionButton:
+                    id: connect
                     text: 'Connect'
+                    on_press: app.connect()
                 ActionButton:
+                    id: disconnect
                     text: 'Disconnect'
+                    disabled: True
+                    on_press: app.disconnect()
 
     GridLayout:
         cols: 2
@@ -36,9 +44,11 @@ BoxLayout:
 
             TabbedPanelItem:
                 text: 'Frame'
+                FrameWidget:
                 
             TabbedPanelItem:
                 text: 'Sequence'
+                SequenceWidget:
             
         RelativeLayout:
             size_hint_x: None
@@ -68,4 +78,4 @@ BoxLayout:
 
             Button:
                 text: 'Capture Preview'
-                size_hint: 1, .1
+                size_hint: 1, .05

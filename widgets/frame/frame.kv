@@ -1,0 +1,26 @@
+#:kivy 1.11.1
+
+
+<FrameWidget>:
+    cols: 2
+
+    RelativeLayout:
+        size_hint_x: None
+        width: 200
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            
+        Label:
+            markup: True
+            text: root.DESCRIPTION
+            multiline: True
+            size_hint: .95, .1
+            text_size: self.size
+            pos_hint: {'top': 1, 'center_x': .5}
+            halign: 'center'
+            font_size: 12
+            
