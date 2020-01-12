@@ -1,6 +1,7 @@
 #:kivy 1.11.1
 
 #:import ApertureWidget widgets.aperture.aperture.ApertureWidget
+#:import FocusWidget widgets.focus.focus.FocusWidget
 #:import IsoWidget widgets.iso.iso.IsoWidget
 #:import ShutterWidget widgets.shutter.shutter.ShutterWidget
 
@@ -31,6 +32,7 @@ BoxLayout:
 
             TabbedPanelItem:
                 text: 'Focus'
+                FocusWidget:
 
             TabbedPanelItem:
                 text: 'Frame'

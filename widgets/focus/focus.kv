@@ -1,0 +1,47 @@
+#:kivy 1.11.1
+
+
+<FocusWidget>:
+    cols: 2
+
+    RelativeLayout:
+        size_hint_x: None
+        width: 200
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: 'HFD'
+            bold: True
+            pos_hint: {'top': 1}
+            size_hint: 1, .1
+            font_size: 18
+            
+        Label:
+            markup: True
+            text: root.DESCRIPTION
+            multiline: True
+            size_hint: .95, .15
+            text_size: self.size
+            pos_hint: {'top': .9, 'center_x': .5}
+            halign: 'center'
+            font_size: 12
+        
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 0.1, 0.1, 0.1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            text: '5.8'
+            bold: True
+            font_size: 36
+            size_hint: 1, .1
+            pos_hint: {'top': .7, 'center_x': .5}
+            
