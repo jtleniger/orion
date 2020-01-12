@@ -1,6 +1,8 @@
 #:kivy 1.11.1
 
+#:import ApertureWidget widgets.aperture.aperture.ApertureWidget
 #:import IsoWidget widgets.iso.iso.IsoWidget
+#:import ShutterWidget widgets.shutter.shutter.ShutterWidget
 
 BoxLayout:
     orientation:'vertical'
@@ -36,20 +38,31 @@ BoxLayout:
             TabbedPanelItem:
                 text: 'Sequence'
             
-        BoxLayout:
+        RelativeLayout:
             size_hint_x: None
             width: 200
-            orientation: 'vertical'
-            spacing: 15
 
             Label:
                 text: 'Camera Settings'
-            Label:
-                text: 'Aperture'
-            Label:
-                text: 'Shutter Speed'
-            Label:
-                text: 'ISO'
-            IsoWidget:
+                bold: True
+                pos_hint: {'top': 1}
+                size_hint: 1, .1
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: .95, .5
+                pos_hint: {'top': .9, 'center_x': .5}
+
+                Label:
+                    text: 'Aperture'
+                ApertureWidget:
+                Label:
+                    text: 'Shutter Speed'
+                ShutterWidget:
+                Label:
+                    text: 'ISO'
+                IsoWidget:
+
             Button:
                 text: 'Capture Preview'
+                size_hint: 1, .1
