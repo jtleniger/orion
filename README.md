@@ -1,21 +1,26 @@
-# orion
+# Orion (orion)
 
-Orion is an astrophotography capture tool for Sony cameras, powered by gphoto2.
+An astrophotography capture tool for Sony cameras.
 
-## Dependencies
+## Install the dependencies
+```bash
+yarn
+```
 
-libgphoto-2
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
+```bash
+quasar dev
+```
 
-python3
+### Lint the files
+```bash
+yarn run lint
+```
 
-python3-dev
+### Build the app for production
+```bash
+quasar build
+```
 
-## Development
-
-### Environment Setup
-1. Install dependencies
-2. Create venv: `python3 -m venv venv`
-3. Activate: `source venv/bin/activate`
-4. Install wheel: `pip install wheel`
-5. Install python-gphoto2: `pip install  -v gphoto2`
-6. Install kivy: `pip install kivy`
+### Customize the configuration
+See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
