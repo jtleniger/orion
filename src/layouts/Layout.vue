@@ -6,20 +6,11 @@
           Orion
         </q-toolbar-title>
 
-        <q-tabs
-          inline-label
-          shrink
-        >
-          <q-route-tab name="focus" icon="center_focus_weak" label="Focus" to="/"/>
-          <q-route-tab name="frame" icon="crop" label="Crop" to="/frame"/>
-          <q-route-tab name="sequence" icon="av_timer" label="Sequence" to="/sequence"/>
-        </q-tabs>
+        <navigation />
 
         <q-space />
 
         <camera-settings />
-
-        <q-btn dense flat icon="camera" @click="capturePreview" />
 
         <q-space />
 
@@ -45,12 +36,14 @@
 
 <script>
 import CameraSettings from '../components/CameraSettings'
+import Navigation from '../components/Navigation'
 
 export default {
   name: 'Layout',
 
   components: {
-    CameraSettings
+    CameraSettings,
+    Navigation
   },
 
   data () {

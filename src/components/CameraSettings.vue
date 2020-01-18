@@ -1,14 +1,16 @@
 <template>
   <div class="camera-settings">
     <div class="col">
-      <q-input v-model.number="shutterSpeed" :disable="!connected" dense type="number" min="0" label="Shutter Speed" />
+      <q-input outlined v-model.number="shutterSpeed" :disable="!connected" dense type="number" min="0" label="Shutter Speed" />
     </div>
     <div class="col q-ml-sm">
-      <q-select :disable="!connected" dense label="ISO" />
+      <q-select outlined :disable="!connected" dense label="ISO" />
     </div>
     <div class="col q-mx-sm">
-      <q-select :disable="!connected" dense label="Aperture" />
+      <q-select outlined :disable="!connected" dense label="Aperture" />
     </div>
+
+    <q-btn dense flat icon="camera" :disable="!connected" @click="capturePreview" />
   </div>
 </template>
 
@@ -34,6 +36,11 @@ export default {
       set (value) {
         this.$store.dispatch('camera/setShutterSpeed', value)
       }
+    }
+  },
+  methods: {
+    capturePreview: function () {
+
     }
   }
 }
