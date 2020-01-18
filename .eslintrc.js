@@ -7,7 +7,9 @@ module.exports = {
   },
 
   env: {
-    browser: true
+    browser: false,
+    node: true,
+    mocha: true
   },
 
   extends: [
