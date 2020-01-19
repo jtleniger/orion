@@ -24,10 +24,11 @@
       <router-view />
     </q-page-container>
 
-    <q-footer class="bg-dark">
+    <q-footer v-bind:class="footerClass">
       <q-toolbar>
-        Status: {{ status }}
+        <span>{{ status }}</span>
         <q-space />
+        <span class="q-mr-md">{{ name }}</span>
         <q-btn :color="connected ? 'positive' : 'negative'" dense flat icon="linked_camera" @click="connectDisconnect" />
       </q-toolbar>
     </q-footer>
@@ -48,7 +49,8 @@ export default {
 
   data () {
     return {
-      miniState: true
+      miniState: true,
+      error: null
     }
   },
 
@@ -61,6 +63,19 @@ export default {
     status: {
       get () {
         return this.$store.getters['camera/status']
+      }
+    },
+    name: {
+      get () {
+        return this.$store.getters['camera/name']
+      }
+    },
+    footerClass: {
+      get () {
+        return {
+          'bg-dark': !this.$store.getters['camera/hasError'],
+          'bg-negative': this.$store.getters['camera/hasError']
+        }
       }
     }
   },
