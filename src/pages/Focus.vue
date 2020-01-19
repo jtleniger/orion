@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <div class="col">
-        Preview
+        <q-img src="http://localhost:8000/file/capture_preview.jpg" />
       </div>
     </div>
   </q-page>

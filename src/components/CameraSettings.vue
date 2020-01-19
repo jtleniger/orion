@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     capturePreview: function () {
-
+      debugger
+      this.$store.state.camera.camera.capturePreview()
     }
   }
 }

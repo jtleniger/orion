@@ -1,4 +1,10 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
+const fs = require('fs')
+const http = require('http')
+const express = require('express')
+const expressApp = express()
+const cors = require('cors')
+const router = express.Router()
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -42,7 +48,15 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+
+  const preview = 'capture_preview.jpg'
+
+  if (fs.existsSync(preview)) {
+    fs.unlinkSync(preview)
+  }
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -55,3 +69,13 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+expressApp.use(cors())
+
+router.get('/file/:name', function (req, res) {
+  res.sendFile(req.params.name, { root: __dirname })
+})
+
+expressApp.use('/', router)
+
+http.createServer(expressApp).listen(8000)

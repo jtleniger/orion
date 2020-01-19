@@ -26,7 +26,11 @@ export class CameraControl {
   }
 
   runCommand (flags) {
-    return execSync(`${CMD} ${flags}`).toString()
+    const stdout = execSync(`${CMD} ${flags}`).toString()
+
+    console.log(stdout)
+
+    return stdout
   }
 
   setConfig (config) {
@@ -35,5 +39,9 @@ export class CameraControl {
 
   getConfig (config) {
     return this.runCommand(`${GET_CFG_FLAG} ${config}`)
+  }
+
+  capturePreview () {
+    return this.runCommand('--capture-preview')
   }
 }
