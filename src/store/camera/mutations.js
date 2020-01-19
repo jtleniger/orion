@@ -5,7 +5,6 @@ export function connect (state) {
 }
 
 export function setError (state, error) {
-  debugger
   state.error = error
 }
 
@@ -19,4 +18,8 @@ export function disconnect (state) {
 
 export function setShutterSpeed (state, shutterSpeed) {
   state.shutterSpeed = shutterSpeed
+}
+
+export function incPreviewKey (state) {
+  state.previewKey++
 }

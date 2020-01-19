@@ -21,3 +21,8 @@ export function disconnect ({ commit }) {
 export function setShutterSpeed ({ commit }, shutterSpeed) {
   commit('setShutterSpeed', shutterSpeed)
 }
+
+export function capturePreview ({ commit, state }) {
+  state.camera.capturePreview()
+  commit('incPreviewKey')
+}

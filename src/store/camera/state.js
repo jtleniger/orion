@@ -5,6 +5,7 @@ export default function () {
     connected: false,
     shutterSpeed: 0,
     camera: new CameraControl(),
-    error: ''
+    error: '',
+    previewKey: 0
   }
 }

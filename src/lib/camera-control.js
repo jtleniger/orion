@@ -42,6 +42,6 @@ export class CameraControl {
   }
 
   capturePreview () {
-    return this.runCommand('--capture-preview')
+    return this.runCommand('--capture-preview --force-overwrite')
   }
 }
