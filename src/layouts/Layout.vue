@@ -1,107 +1,27 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-toolbar-title>
-          Orion
-        </q-toolbar-title>
 
-        <navigation />
-
-        <q-space />
-
-        <camera-settings />
-
-        <q-space />
-
-        <q-btn dense flat icon="minimize" @click="minimize" />
-        <q-btn dense flat icon="crop_square" @click="maximize" />
-        <q-btn dense flat icon="close" @click="closeApp" />
-      </q-toolbar>
-    </q-header>
+    <menu-bar />
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <q-footer v-bind:class="footerClass">
-      <q-toolbar>
-        <span>{{ status }}</span>
-        <q-space />
-        <span class="q-mr-md">{{ name }}</span>
-        <q-btn :color="connected ? 'positive' : 'negative'" dense flat icon="linked_camera" @click="connectDisconnect" />
-      </q-toolbar>
-    </q-footer>
+    <status-bar />
+
   </q-layout>
 </template>
 
 <script>
-import CameraSettings from '../components/CameraSettings'
-import Navigation from '../components/Navigation'
+import MenuBar from '../components/MenuBar'
+import StatusBar from '../components/StatusBar'
 
 export default {
   name: 'Layout',
 
   components: {
-    CameraSettings,
-    Navigation
-  },
-
-  data () {
-    return {
-      miniState: true,
-      error: null
-    }
-  },
-
-  computed: {
-    connected: {
-      get () {
-        return this.$store.state.camera.connected
-      }
-    },
-    status: {
-      get () {
-        return this.$store.getters['camera/status']
-      }
-    },
-    name: {
-      get () {
-        return this.$store.getters['camera/name']
-      }
-    },
-    footerClass: {
-      get () {
-        return {
-          'bg-dark': !this.$store.getters['camera/hasError'],
-          'bg-negative': this.$store.getters['camera/hasError']
-        }
-      }
-    }
-  },
-
-  methods: {
-    minimize () {
-      this.$q.electron.remote.BrowserWindow.getFocusedWindow().minimize()
-    },
-    maximize () {
-      const win = this.$q.electron.remote.BrowserWindow.getFocusedWindow()
-
-      if (win.isMaximized()) {
-        win.unmaximize()
-      } else {
-        win.maximize()
-      }
-    },
-    closeApp () {
-      this.$q.electron.remote.BrowserWindow.getFocusedWindow().close()
-    },
-    capturePreview () {
-      console.log('capture preview')
-    },
-    connectDisconnect () {
-      this.$store.dispatch(`camera/${this.connected ? 'disconnect' : 'connect'}`)
-    }
+    MenuBar,
+    StatusBar
   }
 }
 </script>

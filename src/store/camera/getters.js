@@ -10,6 +10,10 @@ export function status (state) {
   return 'Not Connected.'
 }
 
+export function connected (state) {
+  return state.connected
+}
+
 export function hasError (state) {
   return !!state.error
 }
@@ -20,4 +24,8 @@ export function name (state) {
   }
 
   return ''
+}
+
+export function previewKey (state) {
+  return state.previewKey
 }

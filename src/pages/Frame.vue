@@ -5,14 +5,20 @@
         Plate Solving
       </div>
       <div class="col-10">
-        Preview
+        <preview />
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
+import Preview from '../components/Preview'
+
 export default {
-  name: 'PageFrame'
+  name: 'PageFrame',
+
+  components: {
+    Preview
+  }
 }
 </script>
