@@ -3,14 +3,11 @@
     <div class="col">
       <q-input outlined v-model.number="shutterSpeed" :disable="!connected" dense type="number" min="0" label="Shutter Speed" />
     </div>
-    <div class="col q-ml-sm">
+    <div class="col q-mx-sm">
       <q-select outlined :disable="!connected" dense label="ISO" />
     </div>
-    <div class="col q-mx-sm">
-      <q-select outlined :disable="!connected" dense label="Aperture" />
-    </div>
 
-    <q-btn dense flat icon="camera" :disable="!connected" @click="capturePreview" />
+    <q-btn :loading="capturing" dense flat icon="camera" :disable="!connected" @click="capturePreview" />
   </div>
 </template>
 
@@ -23,6 +20,12 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      capturing: false
+    }
+  },
+
   computed: {
     connected: {
       get () {
@@ -39,8 +42,10 @@ export default {
     }
   },
   methods: {
-    capturePreview: function () {
-      this.$store.dispatch('camera/capturePreview')
+    capturePreview: async function () {
+      this.capturing = true
+      await this.$store.dispatch('camera/capturePreview')
+      this.capturing = false
     }
   }
 }

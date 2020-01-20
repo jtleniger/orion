@@ -1,9 +1,3 @@
-export function connect (state) {
-  if (state.camera.connect()) {
-    state.connected = true
-  }
-}
-
 export function setError (state, error) {
   state.error = error
 }
@@ -12,8 +6,12 @@ export function clearError (state) {
   state.error = ''
 }
 
-export function disconnect (state) {
-  state.connected = false
+export function setConnected (state, connected) {
+  state.connected = connected
+}
+
+export function setModel (state, model) {
+  state.model = model
 }
 
 export function setShutterSpeed (state, shutterSpeed) {

@@ -1,11 +1,14 @@
 <template>
-  <q-footer v-bind:class="footerClass">
-    <q-toolbar>
-      <span>{{ status }}</span>
-      <q-space />
-      <span class="q-mr-md">{{ name }}</span>
-      <q-btn :color="connected ? 'positive' : 'negative'" dense flat icon="linked_camera" @click="connectDisconnect" />
-    </q-toolbar>
+  <q-footer>
+    <div class="row no-wrap">
+      <q-toolbar class="col-9" v-bind:class="statusClass">
+        <q-toolbar-title>{{ status }}</q-toolbar-title>
+      </q-toolbar>
+      <q-toolbar class="col-3 bg-dark">
+        <q-toolbar-title>{{ model }}</q-toolbar-title>
+        <q-btn :loading="connecting" :color="connected ? 'positive' : 'negative'" dense flat icon="linked_camera" @click="connectDisconnect" />
+      </q-toolbar>
+    </div>
   </q-footer>
 </template>
 
@@ -13,14 +16,20 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data: function () {
+    return {
+      connecting: false
+    }
+  },
+
   computed: {
     ...mapGetters({
       connected: 'camera/connected',
       status: 'camera/status',
-      name: 'camera/name',
+      model: 'camera/model',
       hasError: 'camera/hasError'
     }),
-    footerClass: {
+    statusClass: {
       get () {
         return {
           'bg-dark': !this.hasError,
@@ -31,8 +40,10 @@ export default {
   },
 
   methods: {
-    connectDisconnect () {
-      this.$store.dispatch(`camera/${this.connected ? 'disconnect' : 'connect'}`)
+    async connectDisconnect () {
+      this.connecting = true
+      await this.$store.dispatch(`camera/${this.connected ? 'disconnect' : 'connect'}`)
+      this.connecting = false
     }
   }
 }

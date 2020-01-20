@@ -5,9 +5,10 @@ const http = require('http')
 const express = require('express')
 const expressApp = express()
 const cors = require('cors')
+const path = require('path')
 const router = express.Router()
 
-const PREVIEW_FILE = 'capture_preview.jpg'
+const PREVIEW_FILE = 'preview.jpg'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -74,6 +75,12 @@ app.on('activate', () => {
 expressApp.use(cors())
 
 router.get('/preview', function (req, res) {
+  if (!fs.existsSync(PREVIEW_FILE)) {
+    res.sendFile(path.join(__statics, '/logo.png'))
+
+    return
+  }
+
   res.sendFile(PREVIEW_FILE, { root: process.cwd() })
 })
 

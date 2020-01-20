@@ -1,47 +1,59 @@
-const { execSync } = require('child_process')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 
 const CMD = 'gphoto2'
 const SET_CFG_FLAG = '--set-config'
 const GET_CFG_FLAG = '--get-config'
 
 export class CameraControl {
-  model = ''
-
-  connect () {
+  static async connect () {
     let modelConfig
 
     try {
-      modelConfig = this.getConfig('/main/status/cameramodel')
+      modelConfig = await this.getConfig('/main/status/cameramodel')
     } catch (e) {
-      return false
+      return {
+        success: false,
+        model: ''
+      }
     }
 
     if (!modelConfig) {
-      return false
+      return {
+        success: false,
+        model: ''
+      }
     }
 
-    this.model = /Current: (.+)[\r\n]+/g.exec(modelConfig)[1]
+    const model = /Current: (.+)[\r\n]+/g.exec(modelConfig)[1]
 
-    return true
+    await this.setConfig('/main/capturesettings/capturemode', 0)
+
+    return {
+      success: true,
+      model
+    }
   }
 
-  runCommand (flags) {
-    const stdout = execSync(`${CMD} ${flags}`).toString()
+  static async capturePreview () {
+    await this.setConfig('/main/capturesettings/imagequality', 0)
+    await this.runCommand('--capture-image-and-download --force-overwrite --filename=preview.jpg')
+  }
+
+  static async runCommand (flags) {
+    const { stdout, stderr } = await exec(`${CMD} ${flags}`)
 
     console.log(stdout)
+    console.log(stderr)
 
     return stdout
   }
 
-  setConfig (config) {
-    return this.runCommand(`${SET_CFG_FLAG} ${config}`)
+  static async setConfig (config, value) {
+    return this.runCommand(`${SET_CFG_FLAG} ${config}=${value}`)
   }
 
-  getConfig (config) {
+  static async getConfig (config) {
     return this.runCommand(`${GET_CFG_FLAG} ${config}`)
-  }
-
-  capturePreview () {
-    return this.runCommand('--capture-preview --force-overwrite')
   }
 }

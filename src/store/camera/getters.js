@@ -18,9 +18,9 @@ export function hasError (state) {
   return !!state.error
 }
 
-export function name (state) {
+export function model (state) {
   if (state.connected) {
-    return state.camera.model
+    return state.model
   }
 
   return ''
