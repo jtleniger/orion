@@ -1,11 +1,11 @@
-const sharp = require('sharp')
+/***
+ * Calculates the half flux diameter given a Sharp.
+ *
+ */
+export async function (sharp) {
+  const meta = await sharp.metadata()
 
-exports.calculate = async function (buffer) {
-  const image = sharp(buffer)
-
-  const meta = await image.metadata()
-
-  const data = await image
+  const data = await sharp
     .removeAlpha()
     .greyscale()
     .raw()
