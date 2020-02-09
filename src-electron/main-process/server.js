@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const path = require('path')
 const router = express.Router()
+const sharp = require('sharp')
 
 const PREVIEW_FILE = 'preview.jpg'
 

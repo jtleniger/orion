@@ -7,6 +7,13 @@ An astrophotography capture tool for Sony cameras.
 yarn
 ```
 
+## If there is an error about Sharp (Module did not self-register):
+See [this](https://sharp.pixelplumbing.com/install#electron) article on installing Sharp with Electron.
+```bash
+npx electron-rebuild -v 8.0.0
+```
+
+
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
 quasar dev
