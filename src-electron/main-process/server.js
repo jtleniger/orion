@@ -4,7 +4,8 @@ const app = express()
 const cors = require('cors')
 const path = require('path')
 const router = express.Router()
-const sharp = require('sharp')
+const Sharp = require('sharp')
+import { findStars } from './lib/astro/stars'
 
 const PREVIEW_FILE = 'preview.jpg'
 
@@ -21,7 +22,9 @@ router.get('/preview', function (req, res) {
 })
 
 router.get('/stars', function (req, res) {
-  res.send('stars')
+  const img = new Sharp(PREVIEW_FILE)
+  const stars = findStars(img)
+  res.send(stars)
 })
 
 app.use('/', router)
