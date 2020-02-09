@@ -1,7 +1,7 @@
 <template>
   <two-panel-page>
     <template v-slot:left>
-      <preview />
+      <focus />
     </template>
     <template v-slot:right>
       HFD
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import Preview from '../components/Preview'
+import Focus from '../components/Focus'
 import TwoPanelPage from '../components/TwoPanelPage'
 
 export default {
   name: 'PageFocus',
 
   components: {
-    Preview,
+    Focus,
     TwoPanelPage
   }
 }

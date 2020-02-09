@@ -16,11 +16,9 @@
     "@quasar/extras": "^1.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "gphoto2": "^0.3.0",
     "mocha": "^7.0.0",
     "nan": "^2.14.0",
-    "quasar": "^1.0.0",
-    "sharp": "^0.24.0"
+    "quasar": "^1.0.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",

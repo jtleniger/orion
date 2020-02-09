@@ -2,7 +2,7 @@
  * Calculates the half flux diameter given a Sharp.
  *
  */
-export async function (sharp) {
+export async function hfd (sharp) {
   const meta = await sharp.metadata()
 
   const data = await sharp

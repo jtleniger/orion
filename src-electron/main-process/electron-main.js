@@ -1,14 +1,6 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
-
-const fs = require('fs')
-const http = require('http')
-const express = require('express')
-const expressApp = express()
-const cors = require('cors')
-const path = require('path')
-const router = express.Router()
-
-const PREVIEW_FILE = 'preview.jpg'
+import http from 'http'
+import { expressApp } from './server'
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -54,10 +46,6 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow()
-
-  if (fs.existsSync(PREVIEW_FILE)) {
-    fs.unlinkSync(PREVIEW_FILE)
-  }
 })
 
 app.on('window-all-closed', () => {
@@ -71,19 +59,5 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-expressApp.use(cors())
-
-router.get('/preview', function (req, res) {
-  if (!fs.existsSync(PREVIEW_FILE)) {
-    res.sendFile(path.join(__statics, '/logo.png'))
-
-    return
-  }
-
-  res.sendFile(PREVIEW_FILE, { root: process.cwd() })
-})
-
-expressApp.use('/', router)
 
 http.createServer(expressApp).listen(8000)
