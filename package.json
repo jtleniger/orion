@@ -19,7 +19,7 @@
     "mocha": "^7.0.0",
     "nan": "^2.14.0",
     "quasar": "^1.0.0",
-    "sharp": "^0.24.0"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
